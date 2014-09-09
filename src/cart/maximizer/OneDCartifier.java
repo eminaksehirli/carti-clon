@@ -50,7 +50,7 @@ public class OneDCartifier
 		return Arrays.copyOfRange(cartStarts, exStart, cartStarts.length - exEnd);
 	}
 
-	static double[] expandTheDim(int k, double[] sortedDim)
+	public static double[] expandTheDim(int k, double[] sortedDim)
 	{
 		double[] expandedDim = new double[sortedDim.length + k];
 		final int expand = k / 2;
@@ -132,7 +132,7 @@ public class OneDCartifier
 		return origData;
 	}
 
-	static double dist(double d, double e)
+	public static double dist(double d, double e)
 	{
 		return Math.abs(d - e);
 	}

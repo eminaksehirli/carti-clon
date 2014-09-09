@@ -7,7 +7,7 @@ public class Freq
 {
 	public Collection<Integer> freqSet;
 	public List<Integer> freqDims;
-	int id;
+	public final int id;
 	static int autoID = 0;
 
 	public Freq(Collection<Integer> freqSet, List<Integer> freqDims)
