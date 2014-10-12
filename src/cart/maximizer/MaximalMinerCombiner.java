@@ -17,11 +17,6 @@ import cart.cartifier.Pair;
 
 import com.google.common.collect.HashMultimap;
 
-//import cart.maxi.CartiFiner;
-//import cart.maxi.CartiGather;
-//import cart.maxi.FindCartiMaximalAreas;
-//import cart.maxi.CartiGather.Pair;
-
 public abstract class MaximalMinerCombiner
 {
 	protected static int skipCount;
@@ -36,6 +31,7 @@ public abstract class MaximalMinerCombiner
 	// protected int minSup;
 	private double[][] dims;
 	private FreqCollector freqCollector;
+	private List<Integer> theAllDims;
 
 	public MaximalMinerCombiner(String pathname)
 	{
@@ -128,17 +124,22 @@ public abstract class MaximalMinerCombiner
 		List<Integer> dimsToCheck = getAllDims();
 		dimsToCheck.remove(startDimIx);
 		List<Integer> freqDims = singletonList(startDimIx);
-		checkForFreq(unmodifiableList(dimsToCheck), freqDims, aMined);
+//		checkForFreq(unmodifiableList(dimsToCheck), freqDims, aMined);
+		checkForFreq(dimsToCheck, freqDims, aMined);
 	}
 
 	private List<Integer> getAllDims()
 	{
-		List<Integer> allDims = new ArrayList<>(numOfDims);
-		for (int i = 0; i < numOfDims; i++)
+		if (theAllDims == null)
 		{
-			allDims.add(i);
+			List<Integer> allDims = new ArrayList<>(numOfDims);
+			for (int i = 0; i < numOfDims; i++)
+			{
+				allDims.add(i);
+			}
+			theAllDims = allDims;
 		}
-		return allDims;
+		return new ArrayList<Integer>(theAllDims);
 	}
 
 	protected void foundFreq(Collection<Integer> freqSet, List<Integer> freqDims)

@@ -19,9 +19,11 @@ public class ItemsetMaximalMiner extends MaximalMinerCombiner
 	protected void checkForFreq(List<Integer> dimsToCheck,
 			List<Integer> freqDims, Collection<Integer> aMined)
 	{
-		for (int dimIx : dimsToCheck)
+		int checkedUntil = 0;
+		for (int dim : dimsToCheck)
 		{
-			Item[] items = orderTheItems(aMined, dimIx);
+			checkedUntil++;
+			Item[] items = orderTheItems(aMined, dim);
 
 			Map<Integer, Integer> localFreqs = findAllMaxes(items);
 
@@ -39,13 +41,15 @@ public class ItemsetMaximalMiner extends MaximalMinerCombiner
 			if (freqSets.size() > 0)
 			{
 				List<Integer> newFreqDims = new ArrayList<>(freqDims);
-				newFreqDims.add(dimIx);
+				newFreqDims.add(dim);
 
 				for (List<Integer> freqSet : freqSets)
 				{
 					foundFreq(freqSet, newFreqDims);
-					List<Integer> newDimsToCheck = new ArrayList<>(dimsToCheck);
-					newDimsToCheck.remove(Integer.valueOf(dimIx));
+					 List<Integer> newDimsToCheck = new ArrayList<>(dimsToCheck.subList(
+					 checkedUntil, dimsToCheck.size()));
+//					List<Integer> newDimsToCheck = new ArrayList<>(dimsToCheck);
+//					newDimsToCheck.remove(Integer.valueOf(dim));
 					checkForFreq(newDimsToCheck, newFreqDims, freqSet);
 				}
 			}
