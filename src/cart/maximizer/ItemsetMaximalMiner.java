@@ -7,15 +7,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-public abstract class ItemsetMaximalMiner extends MaximalMinerCombiner
+public class ItemsetMaximalMiner extends MaximalMinerCombiner
 {
 
 	private static int area(Item[] dimItems, int start, int end)
 	{
 		return (dimItems[start].txE - dimItems[end].txS) * (end - start);
 	}
-
-	protected abstract int getMinSup();
 
 	@Override
 	protected void checkForFreq(List<Integer> dimsToCheck,
@@ -56,7 +54,7 @@ public abstract class ItemsetMaximalMiner extends MaximalMinerCombiner
 
 	protected Map<Integer, Integer> findAllMaxes(Item[] items)
 	{
-		int minSup = getMinSup();
+		int minSup = minLen;
 		Map<Integer, Integer> maxes = new HashMap<>();
 		int start = 0;
 		int end = start + minLen;
