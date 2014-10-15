@@ -11,8 +11,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.TreeMap;
 
-//import mime.plain.PlainTransactionDB;
-
 import mime.plain.PlainItemDB;
 
 import com.google.common.collect.Maps;
@@ -39,7 +37,6 @@ public class CartifierInMemory
 
 		if (dimensions.length == 1)
 		{
-			// fastCartifier(dimensions, numOfItems, p);
 			sameDataRandomizer(dimensions, numOfItems, k);
 		} else
 		{

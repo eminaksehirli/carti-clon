@@ -102,7 +102,6 @@ public class CartifyDbInMemory
 			throws FileNotFoundException, IOException
 	{
 		readOriginalDatabase();
-		// prepareForPerDimension();
 		dimensions = dims;
 		prepareProjectedDbs();
 		createCarts();

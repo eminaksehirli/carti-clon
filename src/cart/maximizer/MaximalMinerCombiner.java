@@ -18,14 +18,12 @@ public abstract class MaximalMinerCombiner
 {
 	protected static int skipCount;
 	protected int numOfDims;
-	// protected ArrayList<Freq> freqs;
-	protected Pair[][] origDatas;
+	protected Pair[][] origData;
 	protected Pair[][] orderedDims;
 	protected int[][] ids2Orders;
 	private Item[][] allItems;
 	protected HashMultimap<Integer, int[]> allMineds;
 	protected int minLen;
-	// protected int minSup;
 	private double[][] dims;
 	private FreqCollector freqCollector;
 	private List<Integer> theAllDims;
@@ -37,7 +35,7 @@ public abstract class MaximalMinerCombiner
 			ArrayList<double[]> data = OneDCartifier.readData(pathname);
 			dims = OneDCartifier.transpose(data);
 			// System.out.println("Dims data read and transposed");
-			origDatas = OneDCartifier.toPairs(data);
+			origData = OneDCartifier.toPairs(data);
 			// System.out.println("Data pairs are created.");
 		} catch (FileNotFoundException e)
 		{
@@ -51,7 +49,7 @@ public abstract class MaximalMinerCombiner
 		ids2Orders = new int[dims.length][];
 		for (int dimIx = 0; dimIx < numOfDims; dimIx++)
 		{
-			orderedDims[dimIx] = getOrd2Id(origDatas, dimIx);
+			orderedDims[dimIx] = getOrd2Id(origData, dimIx);
 			ids2Orders[dimIx] = getId2Ord(orderedDims[dimIx]);
 		}
 	}
@@ -67,27 +65,17 @@ public abstract class MaximalMinerCombiner
 	{
 		freqCollector = a;
 		this.minLen = minLen;
-		// int minSup = (int) (0.6 * k);
 
 		convertToItems(k);
-		// System.out.println("Items are created!");
 
 		CartiFiner miner = new CartiMaximizer(minLen);
 		Map<Integer, Map<Integer, Integer>> mineds = miner.mineCarts(dims, k);
 		allMineds = mineds2Ids(mineds);
 
-		// for (Integer startDimIx : allMineds.keySet())
-		// {
-		// System.out.println(startDimIx + " : " +
-		// allMineds.get(startDimIx).size());
-		// }
-
 		for (Integer startDimIx : allMineds.keySet())
 		{
 			List<Integer> dimsToCheck = getAllDims();
 			dimsToCheck.remove(startDimIx);
-
-			// List<Integer> dimsToCheck = getPossibleDims(startDimIx);
 
 			List<Integer> freqDims = singletonList(startDimIx);
 
@@ -95,23 +83,10 @@ public abstract class MaximalMinerCombiner
 
 			for (int[] aMined : dimMineds)
 			{
-				// System.out.println("START (" + startDimIx + ") {" + aMined.size()
-				// + "}:" + aMined);
 				foundFreq(aMined, freqDims);
 				checkForFreq(dimsToCheck, freqDims, aMined);
 			}
 		}
-		// System.out.println("Skipped because of small size: " + skipCount);
-	}
-
-	private List<Integer> getPossibleDims(Integer startDimIx)
-	{
-		List<Integer> possibleDims = new ArrayList<>(numOfDims);
-		for (int i = startDimIx + 1; i < numOfDims; i++)
-		{
-			possibleDims.add(i);
-		}
-		return possibleDims;
 	}
 
 	public List<Freq> mineFor(int[] aMined, int k, Integer startDimIx)
@@ -126,8 +101,6 @@ public abstract class MaximalMinerCombiner
 	{
 		freqCollector = freqCollection;
 		minLen = (int) (0.6 * k);
-		// int minSup = (int) (0.6 * k);
-		//
 		convertToItems(k);
 		System.out.println("Items are created!");
 
@@ -162,10 +135,6 @@ public abstract class MaximalMinerCombiner
 		}
 
 		freqCollector.foundFreq(new Freq(freqSet, freqDims));
-		// freqs.add(new Freq(freqSet, freqDims));
-
-		// System.out.println(freqSet.size() + ":" + freqSet + " is frequent in "
-		// + freqDims);
 	}
 
 	protected Item[] orderTheItems(int[] aMined, int dimIx)
@@ -318,10 +287,6 @@ public abstract class MaximalMinerCombiner
 		public void foundFreq(Freq freq)
 		{
 			freqs.add(freq);
-			// if (freqs.size() % 1000 == 0)
-			// {
-			// System.err.println("Freqs.size = " + freqs.size());
-			// }
 		}
 	}
 }

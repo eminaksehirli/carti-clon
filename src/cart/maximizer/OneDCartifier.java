@@ -11,7 +11,8 @@ import cart.cartifier.Pair;
 
 public class OneDCartifier
 {
-	public static int[] findCartStarts(final double[] dim, int k, boolean extendDim)
+	public static int[] findCartStarts(final double[] dim, int k,
+			boolean extendDim)
 	{
 		double[] sortedDim = Arrays.copyOf(dim, dim.length);
 		Arrays.sort(sortedDim);
