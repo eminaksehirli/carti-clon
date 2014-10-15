@@ -1,17 +1,14 @@
 package cart.maximizer;
 
 import static java.util.Collections.singletonList;
-import static java.util.Collections.unmodifiableList;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
 
 import cart.cartifier.Pair;
 
@@ -26,7 +23,7 @@ public abstract class MaximalMinerCombiner
 	protected Pair[][] orderedDims;
 	protected int[][] ids2Orders;
 	private Item[][] allItems;
-	protected HashMultimap<Integer, Set<Integer>> allMineds;
+	protected HashMultimap<Integer, int[]> allMineds;
 	protected int minLen;
 	// protected int minSup;
 	private double[][] dims;
@@ -89,29 +86,42 @@ public abstract class MaximalMinerCombiner
 		{
 			List<Integer> dimsToCheck = getAllDims();
 			dimsToCheck.remove(startDimIx);
+
+			// List<Integer> dimsToCheck = getPossibleDims(startDimIx);
+
 			List<Integer> freqDims = singletonList(startDimIx);
 
-			Set<Set<Integer>> dimMineds = allMineds.get(startDimIx);
+			Collection<int[]> dimMineds = allMineds.get(startDimIx);
 
-			for (Set<Integer> aMined : dimMineds)
+			for (int[] aMined : dimMineds)
 			{
 				// System.out.println("START (" + startDimIx + ") {" + aMined.size()
 				// + "}:" + aMined);
 				foundFreq(aMined, freqDims);
-				checkForFreq(unmodifiableList(dimsToCheck), freqDims, aMined);
+				checkForFreq(dimsToCheck, freqDims, aMined);
 			}
 		}
 		// System.out.println("Skipped because of small size: " + skipCount);
 	}
 
-	public List<Freq> mineFor(Set<Integer> aMined, int k, Integer startDimIx)
+	private List<Integer> getPossibleDims(Integer startDimIx)
+	{
+		List<Integer> possibleDims = new ArrayList<>(numOfDims);
+		for (int i = startDimIx + 1; i < numOfDims; i++)
+		{
+			possibleDims.add(i);
+		}
+		return possibleDims;
+	}
+
+	public List<Freq> mineFor(int[] aMined, int k, Integer startDimIx)
 	{
 		final FreqCollection freqCollection = new FreqCollection();
 		mineFor(aMined, k, startDimIx, freqCollection);
 		return freqCollection.freqs;
 	}
 
-	private void mineFor(Set<Integer> aMined, int k, Integer startDimIx,
+	private void mineFor(int[] aMined, int k, Integer startDimIx,
 			final FreqCollection freqCollection)
 	{
 		freqCollector = freqCollection;
@@ -124,7 +134,6 @@ public abstract class MaximalMinerCombiner
 		List<Integer> dimsToCheck = getAllDims();
 		dimsToCheck.remove(startDimIx);
 		List<Integer> freqDims = singletonList(startDimIx);
-//		checkForFreq(unmodifiableList(dimsToCheck), freqDims, aMined);
 		checkForFreq(dimsToCheck, freqDims, aMined);
 	}
 
@@ -142,9 +151,9 @@ public abstract class MaximalMinerCombiner
 		return new ArrayList<Integer>(theAllDims);
 	}
 
-	protected void foundFreq(Collection<Integer> freqSet, List<Integer> freqDims)
+	protected void foundFreq(int[] freqSet, List<Integer> freqDims)
 	{
-		if (freqSet.size() < minLen)
+		if (freqSet.length < minLen)
 		{
 			skipCount++;
 			System.err.println("[" + this.getClass().getName()
@@ -159,9 +168,9 @@ public abstract class MaximalMinerCombiner
 		// + freqDims);
 	}
 
-	protected Item[] orderTheItems(Collection<Integer> aMined, int dimIx)
+	protected Item[] orderTheItems(int[] aMined, int dimIx)
 	{
-		int[] ordered = new int[aMined.size()];
+		int[] ordered = new int[aMined.length];
 		int itemIx = 0;
 		for (int item : aMined)
 		{
@@ -222,10 +231,10 @@ public abstract class MaximalMinerCombiner
 		allItems = nAllItems;
 	}
 
-	protected HashMultimap<Integer, Set<Integer>> mineds2Ids(
+	protected HashMultimap<Integer, int[]> mineds2Ids(
 			Map<Integer, Map<Integer, Integer>> mineds)
 	{
-		HashMultimap<Integer, Set<Integer>> allFIs = HashMultimap.create();
+		HashMultimap<Integer, int[]> allFIs = HashMultimap.create();
 
 		for (Entry<Integer, Map<Integer, Integer>> entry : mineds.entrySet())
 		{
@@ -234,10 +243,12 @@ public abstract class MaximalMinerCombiner
 
 			for (Entry<Integer, Integer> dimLined : dimMineds.entrySet())
 			{
-				Set<Integer> fis = new HashSet<>();
-				for (int i = dimLined.getValue(); i < dimLined.getKey(); i++)
+				final int start = dimLined.getValue();
+				final int end = dimLined.getKey();
+				int[] fis = new int[end - start];
+				for (int i = start; i < end; i++)
 				{
-					fis.add(orderedDims[dimIx][i].ix);
+					fis[i - start] = orderedDims[dimIx][i].ix;
 				}
 				allFIs.put(dimIx, fis);
 			}
@@ -246,7 +257,7 @@ public abstract class MaximalMinerCombiner
 	}
 
 	protected abstract void checkForFreq(List<Integer> dimsToCheck,
-			List<Integer> freqDims, Collection<Integer> aMined);
+			List<Integer> freqDims, int[] aMined);
 
 	protected static class Result
 	{

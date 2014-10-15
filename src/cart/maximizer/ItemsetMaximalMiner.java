@@ -1,7 +1,6 @@
 package cart.maximizer;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,7 +8,6 @@ import java.util.Map.Entry;
 
 public class ItemsetMaximalMiner extends MaximalMinerCombiner
 {
-
 	private static int area(Item[] dimItems, int start, int end)
 	{
 		return (dimItems[start].txE - dimItems[end].txS) * (end - start);
@@ -17,7 +15,7 @@ public class ItemsetMaximalMiner extends MaximalMinerCombiner
 
 	@Override
 	protected void checkForFreq(List<Integer> dimsToCheck,
-			List<Integer> freqDims, Collection<Integer> aMined)
+			List<Integer> freqDims, int[] aMined)
 	{
 		int checkedUntil = 0;
 		for (int dim : dimsToCheck)
@@ -26,32 +24,35 @@ public class ItemsetMaximalMiner extends MaximalMinerCombiner
 			Item[] items = orderTheItems(aMined, dim);
 
 			Map<Integer, Integer> localFreqs = findAllMaxes(items);
-
-			List<List<Integer>> freqSets = new ArrayList<>();
-			for (Entry<Integer, Integer> e : localFreqs.entrySet())
+			if (localFreqs.size() <= 0)
 			{
-				List<Integer> freqSet = new ArrayList<>();
-				for (int freqIx = e.getValue(); freqIx < e.getKey(); freqIx++)
-				{
-					freqSet.add(items[freqIx].id);
-				}
-				freqSets.add(freqSet);
+				continue;
 			}
 
-			if (freqSets.size() > 0)
+			int[][] freqSets = new int[localFreqs.size()][];
+			int freqSetIx = 0;
+			for (Entry<Integer, Integer> e : localFreqs.entrySet())
 			{
-				List<Integer> newFreqDims = new ArrayList<>(freqDims);
-				newFreqDims.add(dim);
+				final Integer start = e.getValue();
+				final Integer end = e.getKey();
 
-				for (List<Integer> freqSet : freqSets)
+				int[] freqSet = new int[end - start];
+				for (int freqIx = start; freqIx < end; freqIx++)
 				{
-					foundFreq(freqSet, newFreqDims);
-					 List<Integer> newDimsToCheck = new ArrayList<>(dimsToCheck.subList(
-					 checkedUntil, dimsToCheck.size()));
-//					List<Integer> newDimsToCheck = new ArrayList<>(dimsToCheck);
-//					newDimsToCheck.remove(Integer.valueOf(dim));
-					checkForFreq(newDimsToCheck, newFreqDims, freqSet);
+					freqSet[freqIx - start] = items[freqIx].id;
 				}
+				freqSets[freqSetIx++] = freqSet;
+			}
+
+			List<Integer> newFreqDims = new ArrayList<>(freqDims);
+			newFreqDims.add(dim);
+
+			for (int[] freqSet : freqSets)
+			{
+				foundFreq(freqSet, newFreqDims);
+				List<Integer> newDimsToCheck = new ArrayList<>(dimsToCheck.subList(
+						checkedUntil, dimsToCheck.size()));
+				checkForFreq(newDimsToCheck, newFreqDims, freqSet);
 			}
 		}
 	}
@@ -96,5 +97,4 @@ public class ItemsetMaximalMiner extends MaximalMinerCombiner
 	{
 		super(pathname);
 	}
-
 }

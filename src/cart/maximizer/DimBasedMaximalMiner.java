@@ -24,28 +24,29 @@ public class DimBasedMaximalMiner extends MaximalMinerCombiner
 
 	@Override
 	protected void checkForFreq(List<Integer> dimsToCheck,
-			List<Integer> freqDims, Collection<Integer> aMined)
+			List<Integer> freqDims, int[] aMined)
 	{
-		for (Integer dimIx : dimsToCheck)
-		{
-			Set<Set<Integer>> dimMineds = allMineds.get(dimIx);
-
-			for (Set<Integer> dimMined : dimMineds)
-			{
-				Set<Integer> intersect = new HashSet<>(aMined);
-				intersect.retainAll(dimMined);
-
-				if (intersect.size() > minLen)
-				{
-					List<Integer> newFreqDims = new ArrayList<>(freqDims);
-					newFreqDims.add(dimIx);
-
-					foundFreq(intersect, newFreqDims);
-					List<Integer> newDimsToCheck = new ArrayList<>(dimsToCheck);
-					newDimsToCheck.remove(dimIx);
-					checkForFreq(newDimsToCheck, newFreqDims, intersect);
-				}
-			}
-		}
+//		for (Integer dimIx : dimsToCheck)
+//		{
+//			//FIXME: convert array to sets
+//			Set<Set<Integer>> dimMineds = allMineds.get(dimIx);
+//
+//			for (Set<Integer> dimMined : dimMineds)
+//			{
+//				Set<Integer> intersect = new HashSet<>(aMined);
+//				intersect.retainAll(dimMined);
+//
+//				if (intersect.size() > minLen)
+//				{
+//					List<Integer> newFreqDims = new ArrayList<>(freqDims);
+//					newFreqDims.add(dimIx);
+//
+//					foundFreq(intersect, newFreqDims);
+//					List<Integer> newDimsToCheck = new ArrayList<>(dimsToCheck);
+//					newDimsToCheck.remove(dimIx);
+//					checkForFreq(newDimsToCheck, newFreqDims, intersect);
+//				}
+//			}
+//		}
 	}
 }
