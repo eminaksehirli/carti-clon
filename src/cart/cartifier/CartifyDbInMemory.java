@@ -4,11 +4,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Scanner;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -16,6 +14,7 @@ import java.util.concurrent.TimeUnit;
 
 import mime.plain.PlainItem;
 import mime.plain.PlainItemDB;
+import cart.io.InputFile;
 
 public class CartifyDbInMemory
 {
@@ -45,16 +44,17 @@ public class CartifyDbInMemory
 
 	public int[][] dimensions;
 	private List<double[]> originalDatabase;
-	private String originalDatabaseFilename;
 
 	private PlainItemDB[] projectedDbs;
 	public PlainItemDB completeDb;
 
 	private PrintWriter log;
 
-	public CartifyDbInMemory(String databaseFileName, int k)
+	private InputFile inputFile;
+
+	public CartifyDbInMemory(InputFile inputFile, int k)
 	{
-		originalDatabaseFilename = databaseFileName;
+		this.inputFile = inputFile;
 		this.k = k;
 		try
 		{
@@ -98,8 +98,7 @@ public class CartifyDbInMemory
 		return mergeToAFinalTDb(k);
 	}
 
-	private PlainItemDB cartifyIt(int k, int[][] dims)
-			throws FileNotFoundException, IOException
+	private PlainItemDB cartifyIt(int k, int[][] dims) throws IOException
 	{
 		readOriginalDatabase();
 		dimensions = dims;
@@ -143,7 +142,6 @@ public class CartifyDbInMemory
 			allTransactions.or(bigItem.getTIDs());
 		}
 
-		// completeDb.transactionCounter = allTransactions.cardinality();
 		log("Final db is created.");
 		return completeDb;
 	}
@@ -156,25 +154,7 @@ public class CartifyDbInMemory
 
 	private void readOriginalDatabase() throws FileNotFoundException
 	{
-		originalDatabase = new ArrayList<double[]>();
-
-		log("Reading the file: " + originalDatabaseFilename);
-		Scanner sc = new Scanner(new File(originalDatabaseFilename));
-		while (sc.hasNextLine())
-		{
-			String line = sc.nextLine();
-			String delimiter = " ";
-			String[] lineArr = line.split(delimiter);
-
-			double[] thisRow = new double[lineArr.length];
-			for (int i = 0; i < lineArr.length; i++)
-			{
-				thisRow[i] = Double.parseDouble(lineArr[i]);
-			}
-			originalDatabase.add(thisRow);
-		}
-		sc.close();
-
+		inputFile.getData();
 	}
 
 	private void prepareForPerDimension()

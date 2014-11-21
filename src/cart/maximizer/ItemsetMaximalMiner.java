@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import cart.io.InputFile;
+
 public class ItemsetMaximalMiner extends MaximalMinerCombiner
 {
 	private static int area(Item[] dimItems, int start, int end)
@@ -93,8 +95,8 @@ public class ItemsetMaximalMiner extends MaximalMinerCombiner
 		return maxes;
 	}
 
-	public ItemsetMaximalMiner(String pathname)
+	public ItemsetMaximalMiner(InputFile inputFile)
 	{
-		super(pathname);
+		super(inputFile);
 	}
 }

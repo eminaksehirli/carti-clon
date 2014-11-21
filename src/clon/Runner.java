@@ -5,6 +5,7 @@ import static java.lang.Integer.parseInt;
 import java.util.Arrays;
 import java.util.List;
 
+import cart.io.InputFile;
 import cart.maximizer.Freq;
 import cart.maximizer.ItemsetMaximalMiner;
 
@@ -24,7 +25,7 @@ public class Runner
 		int k = parseInt(args[1]);
 		int minLen = parseInt(args[2]);
 
-		ItemsetMaximalMiner miner = new ItemsetMaximalMiner(fileName);
+		ItemsetMaximalMiner miner = new ItemsetMaximalMiner(InputFile.forMime(fileName));
 		List<Freq> clusters = miner.mineFor(k, minLen);
 
 		for (Freq cluster : clusters)

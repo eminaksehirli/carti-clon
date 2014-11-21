@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import cart.cartifier.Pair;
+import cart.io.InputFile;
 
 public class OneDCartifier
 {
@@ -93,29 +94,17 @@ public class OneDCartifier
 		return dims;
 	}
 
-	public static ArrayList<double[]> readData(String pathname)
-			throws FileNotFoundException
-	{
-		Scanner sc = new Scanner(new File(pathname));
-
-		ArrayList<double[]> data = new ArrayList<>();
-
-		while (sc.hasNextLine())
-		{
-			String line = sc.nextLine();
-			String[] arr = line.split(" ");
-
-			double[] values = new double[arr.length];
-			for (int i = 0; i < arr.length; i++)
-			{
-				values[i] = Double.parseDouble(arr[i]);
-			}
-			data.add(values);
-		}
-		sc.close();
-		return data;
-	}
-
+	/**
+	 * Takes a list of objects, where each object is a double[], and returns a 2D
+	 * array of Pairs, where each row corresponds to an object and each column is
+	 * a pair of object ID and the value for the attribute.
+	 * 
+	 * E.g., {{1,2},{3,4},{6,7}} becomes
+	 * {{[1,0],[2,0]},{[3,1],[4,1]},{[6,1],[7,1]}}
+	 * 
+	 * @param objects
+	 * @return
+	 */
 	public static Pair[][] toPairs(List<double[]> objects)
 	{
 		Pair[][] origData = new Pair[objects.size()][];

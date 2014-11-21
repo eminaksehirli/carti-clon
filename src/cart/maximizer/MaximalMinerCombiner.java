@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import cart.cartifier.Pair;
+import cart.io.InputFile;
 
 import com.google.common.collect.HashMultimap;
 
@@ -28,11 +29,11 @@ public abstract class MaximalMinerCombiner
 	private FreqCollector freqCollector;
 	private List<Integer> theAllDims;
 
-	public MaximalMinerCombiner(String pathname)
+	public MaximalMinerCombiner(InputFile inputFile)
 	{
 		try
 		{
-			ArrayList<double[]> data = OneDCartifier.readData(pathname);
+			ArrayList<double[]> data = inputFile.getData();
 			dims = OneDCartifier.transpose(data);
 			// System.out.println("Dims data read and transposed");
 			origData = OneDCartifier.toPairs(data);
