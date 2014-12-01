@@ -17,7 +17,6 @@ import com.google.common.collect.Maps;
 
 public class CartifierInMemory
 {
-
 	public static final double Sampling_Ratio = 1;
 	protected List<double[]> db;
 	public PlainItemDB itemDb;

@@ -90,18 +90,11 @@ public abstract class MaximalMinerCombiner
 		}
 	}
 
-	public List<Freq> mineFor(int[] aMined, int k, Integer startDimIx)
+	public List<Freq> mineFor(int[] aMined, int k, int minLen, Integer startDimIx)
 	{
 		final FreqCollection freqCollection = new FreqCollection();
-		mineFor(aMined, k, startDimIx, freqCollection);
-		return freqCollection.freqs;
-	}
-
-	private void mineFor(int[] aMined, int k, Integer startDimIx,
-			final FreqCollection freqCollection)
-	{
 		freqCollector = freqCollection;
-		minLen = (int) (0.6 * k);
+		this.minLen = minLen;
 		convertToItems(k);
 		System.out.println("Items are created!");
 
@@ -109,6 +102,7 @@ public abstract class MaximalMinerCombiner
 		dimsToCheck.remove(startDimIx);
 		List<Integer> freqDims = singletonList(startDimIx);
 		checkForFreq(dimsToCheck, freqDims, aMined);
+		return freqCollection.freqs;
 	}
 
 	private List<Integer> getAllDims()
