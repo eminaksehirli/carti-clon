@@ -18,28 +18,6 @@ import cart.io.InputFile;
 
 public class CartifyDbInMemory
 {
-
-	private final class RunnableImplementation implements Runnable
-	{
-		private final int[] dimension;
-		private int dimIx;
-
-		private RunnableImplementation(int dimIx)
-		{
-			this.dimension = dimensions[dimIx];
-			this.dimIx = dimIx;
-		}
-
-		@Override
-		public void run()
-		{
-			log("Creating cart for dimension #" + dimIx);
-			CartifierInMemory cartifier = new CartifierInMemory(originalDatabase);
-			cartifier.cartifyNumeric(dimension, k);
-			projectedDbs[dimIx] = cartifier.itemDb;
-		}
-	}
-
 	private int k;
 
 	public int[][] dimensions;
@@ -154,7 +132,7 @@ public class CartifyDbInMemory
 
 	private void readOriginalDatabase() throws FileNotFoundException
 	{
-		inputFile.getData();
+		originalDatabase = inputFile.getData();
 	}
 
 	private void prepareForPerDimension()
@@ -214,6 +192,27 @@ public class CartifyDbInMemory
 		} catch (FileNotFoundException e)
 		{
 			e.printStackTrace();
+		}
+	}
+
+	private final class RunnableImplementation implements Runnable
+	{
+		private final int[] dimension;
+		private int dimIx;
+
+		private RunnableImplementation(int dimIx)
+		{
+			this.dimension = dimensions[dimIx];
+			this.dimIx = dimIx;
+		}
+
+		@Override
+		public void run()
+		{
+			log("Creating cart for dimension #" + dimIx);
+			CartifierInMemory cartifier = new CartifierInMemory(originalDatabase);
+			cartifier.cartifyNumeric(dimension, k);
+			projectedDbs[dimIx] = cartifier.itemDb;
 		}
 	}
 }
