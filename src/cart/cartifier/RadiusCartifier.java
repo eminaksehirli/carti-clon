@@ -21,12 +21,12 @@ public class RadiusCartifier extends Cartifier
 		for (int objIx = 0; objIx < len; objIx++)
 		{
 			int cs = objIx;
-			int ce = objIx;
-			while (cs > 0 && dist.between(objs[objIx], objs[cs - 1]) < eps)
+			int ce = objIx+1;
+			while (cs > 0 && dist.between(objs[objIx], objs[cs - 1]) <= eps)
 			{
 				cs--;
 			}
-			while (ce + 1 < len && dist.between(objs[objIx], objs[ce + 1]) < eps)
+			while (ce + 1 < len && dist.between(objs[objIx], objs[ce + 1]) <= eps)
 			{
 				ce++;
 			}
