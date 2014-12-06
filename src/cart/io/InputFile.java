@@ -91,4 +91,10 @@ public class InputFile
 			this.rowNames = rowNamesList.toArray(new String[0]);
 		}
 	}
+
+	public String baseName()
+	{
+		File f = new File(fileName);
+		return f.getName();
+	}
 }
