@@ -31,7 +31,9 @@ public abstract class CartifyDb
 		this.measures = new ArrayList<>(measures);
 		try
 		{
-			log = new PrintWriter(File.createTempFile("cartify-log-", ".txt"));
+			final File logFile = File.createTempFile("cartify-log-", ".txt");
+			logFile.deleteOnExit();
+			log = new PrintWriter(logFile);
 		} catch (IOException e)
 		{
 			e.printStackTrace();
