@@ -78,7 +78,7 @@ public class InputFile
 				firstValueAt = 1;
 			}
 
-			for (int i = firstValueAt; i < dataLen; i++)
+			for (int i = firstValueAt; i < arr.length; i++)
 			{
 				values[i - firstValueAt] = Double.parseDouble(arr[i]);
 			}

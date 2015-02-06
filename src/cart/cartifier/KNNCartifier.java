@@ -25,6 +25,13 @@ public class KNNCartifier extends Cartifier
 			final Obj obj = objs[objIx];
 			int ce = cs + k; // cartEnd is exclusive
 
+			// obj should always be in the cart
+			while (ce <= objIx)
+			{
+				cs++;
+				ce++;
+			}
+			// optimize the cart
 			while (ce < objs.length
 					&& dist.between(obj, objs[ce]) < dist.between(obj, objs[cs]))
 			{
