@@ -38,6 +38,11 @@ public class KNNCartifier extends Cartifier
 				cs++;
 				ce++;
 			}
+			// extend the cart(Start)
+			while (cs > 0 && dist.between(objs[cs - 1], objs[cs]) == 0)
+			{
+				cs--;
+			}
 			// extend the cart(End)
 			while (ce < objs.length && dist.between(objs[ce - 1], objs[ce]) == 0)
 			{
