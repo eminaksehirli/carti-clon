@@ -4,6 +4,7 @@ import static java.util.Collections.singletonList;
 
 public class OneDimDissimilarity extends Dissimilarity
 {
+	@SuppressWarnings("boxing")
 	public OneDimDissimilarity(int dim)
 	{
 		super(singletonList(dim));

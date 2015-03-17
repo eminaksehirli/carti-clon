@@ -125,7 +125,8 @@ public abstract class MaximalMinerCombiner
 		{
 			skipCount++;
 			System.err.println("[" + this.getClass().getName()
-					+ "] Small itemset found! This is an error: " + freqSet);
+					+ "] Small itemset found! This is an error: "
+					+ Arrays.toString(freqSet));
 			return;
 		}
 

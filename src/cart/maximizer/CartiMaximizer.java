@@ -20,7 +20,6 @@ public class CartiMaximizer implements CartiFiner
 	@Override
 	public Map<Integer, Integer> mineOneDim(double[] dim, int k)
 	{
-
 		int minSup = (int) (k * 0.6);
 		int minLen = minSup;
 
@@ -52,8 +51,8 @@ public class CartiMaximizer implements CartiFiner
 				freqs.put(cartStarts[start] + k, cartStarts[end]);
 			}
 
-			while (cartStarts[start + 1] == cartStarts[start]
-					&& start < cartStarts.length - minSup)
+			while (start < cartStarts.length - minSup
+					&& cartStarts[start + 1] == cartStarts[start])
 			{
 				start++;
 			}

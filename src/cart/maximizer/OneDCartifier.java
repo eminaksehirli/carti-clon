@@ -27,7 +27,7 @@ public class OneDCartifier
 
 		cartStarts[0] = cartStart;
 
-		// since we add a #exStart objects at the beginning we ofset the indices by
+		// since we add #exStart objects at the beginning we offset the indices by
 		// exStart
 		for (int objIx = 0; objIx < sortedDim.length; objIx++)
 		{
