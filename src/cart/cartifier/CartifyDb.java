@@ -92,7 +92,7 @@ public abstract class CartifyDb
 		}
 
 		// BitSet.ADDRESS_BITS_PER_WORD == 6
-		int bitSetWordsPerProjection = db.length >> 6;
+		int bitSetWordsPerProjection = (db.length >> 6) + 1;
 		for (PlainItem item : allTheItems)
 		{
 			long[] tidsArr = new long[projectedDbs.length * bitSetWordsPerProjection];
