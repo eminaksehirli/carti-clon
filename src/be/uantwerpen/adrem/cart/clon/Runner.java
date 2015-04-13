@@ -1,4 +1,4 @@
-package clon;
+package be.uantwerpen.adrem.cart.clon;
 
 import static java.lang.Integer.parseInt;
 
