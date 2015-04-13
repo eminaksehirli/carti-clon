@@ -1,7 +1,6 @@
 package cart.cartifier;
 
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.List;
 
 import cart.io.InputFile;
@@ -10,15 +9,11 @@ public class CartifyKNNDb extends CartifyDb
 {
 	public static CartifyKNNDb perDim(InputFile inputFile, int k)
 	{
-		List<Dissimilarity> measures = new ArrayList<>();
 		try
 		{
 			List<double[]> data = inputFile.getData();
 			int numOfDims = data.get(0).length;
-			for (int i = 0; i < numOfDims; i++)
-			{
-				measures.add(new OneDimDissimilarity(i));
-			}
+			List<Dissimilarity> measures = OneDimDissimilarity.forEach(numOfDims);
 			return new CartifyKNNDb(inputFile, measures, k);
 		} catch (FileNotFoundException e)
 		{

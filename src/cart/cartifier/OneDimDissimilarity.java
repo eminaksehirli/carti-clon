@@ -2,8 +2,21 @@ package cart.cartifier;
 
 import static java.util.Collections.singletonList;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class OneDimDissimilarity extends Dissimilarity
 {
+	public static List<Dissimilarity> forEach(int numOfDims)
+	{
+		List<Dissimilarity> measures = new ArrayList<>(numOfDims);
+		for (int i = 0; i < numOfDims; i++)
+		{
+			measures.add(new OneDimDissimilarity(i));
+		}
+		return measures;
+	}
+
 	@SuppressWarnings("boxing")
 	public OneDimDissimilarity(int dim)
 	{
