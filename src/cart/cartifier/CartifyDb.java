@@ -13,8 +13,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-import mime.plain.PlainItem;
-import mime.plain.PlainItemDB;
+import be.uantwerpen.adrem.fim.model.PlainItem;
+import be.uantwerpen.adrem.fim.model.PlainItemDB;
 import cart.io.InputFile;
 
 public abstract class CartifyDb

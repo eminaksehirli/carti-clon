@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 
-import mime.plain.PlainItemDB;
+import be.uantwerpen.adrem.fim.model.PlainItemDB;
 
 public abstract class Cartifier
 {
