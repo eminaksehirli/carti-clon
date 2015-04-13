@@ -10,8 +10,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import cart.cartifier.Pair;
-import cart.io.InputFile;
+import be.uantwerpen.adrem.cart.io.InputFile;
+import be.uantwerpen.adrem.cart.model.Pair;
 
 import com.google.common.collect.HashMultimap;
 

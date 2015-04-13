@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import cart.cartifier.Pair;
+import be.uantwerpen.adrem.cart.model.Pair;
 
 public class OneDCartifier
 {

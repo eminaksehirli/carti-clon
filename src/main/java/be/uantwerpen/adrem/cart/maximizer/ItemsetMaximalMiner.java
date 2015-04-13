@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import cart.io.InputFile;
+import be.uantwerpen.adrem.cart.io.InputFile;
 
 public class ItemsetMaximalMiner extends MaximalMinerCombiner
 {

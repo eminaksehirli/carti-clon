@@ -2,12 +2,11 @@ package be.uantwerpen.adrem.cart.clon;
 
 import static java.lang.Integer.parseInt;
 
-import java.util.Arrays;
 import java.util.List;
 
+import be.uantwerpen.adrem.cart.io.InputFile;
 import be.uantwerpen.adrem.cart.maximizer.Freq;
 import be.uantwerpen.adrem.cart.maximizer.ItemsetMaximalMiner;
-import cart.io.InputFile;
 
 public class Runner
 {

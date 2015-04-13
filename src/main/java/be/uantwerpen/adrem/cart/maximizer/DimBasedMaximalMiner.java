@@ -2,7 +2,7 @@ package be.uantwerpen.adrem.cart.maximizer;
 
 import java.util.List;
 
-import cart.io.InputFile;
+import be.uantwerpen.adrem.cart.io.InputFile;
 
 public class DimBasedMaximalMiner extends MaximalMinerCombiner
 {
