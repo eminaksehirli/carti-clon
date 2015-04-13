@@ -1,4 +1,4 @@
-package cart.maximizer;
+package be.uantwerpen.adrem.cart.maximizer;
 
 import java.util.Map;
 

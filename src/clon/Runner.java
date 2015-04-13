@@ -5,9 +5,9 @@ import static java.lang.Integer.parseInt;
 import java.util.Arrays;
 import java.util.List;
 
+import be.uantwerpen.adrem.cart.maximizer.Freq;
+import be.uantwerpen.adrem.cart.maximizer.ItemsetMaximalMiner;
 import cart.io.InputFile;
-import cart.maximizer.Freq;
-import cart.maximizer.ItemsetMaximalMiner;
 
 public class Runner
 {
