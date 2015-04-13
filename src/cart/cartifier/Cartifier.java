@@ -11,7 +11,7 @@ public abstract class Cartifier
 {
 	protected Obj[] db;
 	protected Dissimilarity dist;
-	private PlainItemDB itemDb;
+	protected PlainItemDB itemDb;
 
 	Cartifier(Obj[] db, Dissimilarity dist)
 	{
@@ -38,14 +38,7 @@ public abstract class Cartifier
 			});
 			final Obj[] sortedDb = sortedDbList.toArray(new Obj[0]);
 
-			int[][] carts = find1DCarts(sortedDb);
-			for (int i = 0; i < carts.length; i++)
-			{
-				for (int neighborIx = carts[i][0]; neighborIx < carts[i][1]; neighborIx++)
-				{
-					itemDb.get(sortedDb[neighborIx].id).getTIDs().set(sortedDb[i].id);
-				}
-			}
+			find1DCarts(sortedDb);
 		} else
 		{
 			for (int i = 0; i < db.length; i++)
@@ -68,7 +61,7 @@ public abstract class Cartifier
 		return itemDb;
 	}
 
-	protected abstract int[][] find1DCarts(Obj[] sortedObjs);
+	protected abstract void find1DCarts(final Obj[] sortedDb);
 
 	protected abstract Obj[] findMultiDCart(Pair[] distances);
 }

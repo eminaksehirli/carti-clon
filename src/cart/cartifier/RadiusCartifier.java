@@ -2,7 +2,7 @@ package cart.cartifier;
 
 import java.util.ArrayList;
 
-public class RadiusCartifier extends Cartifier
+public class RadiusCartifier extends ContinuousCartifier
 {
 	private double eps;
 
@@ -13,7 +13,7 @@ public class RadiusCartifier extends Cartifier
 	}
 
 	@Override
-	protected int[][] find1DCarts(Obj[] objs)
+	protected int[][] findContinuousCarts(Obj[] objs)
 	{
 		final int len = objs.length;
 		int[][] carts = new int[len][2];
@@ -21,7 +21,7 @@ public class RadiusCartifier extends Cartifier
 		for (int objIx = 0; objIx < len; objIx++)
 		{
 			int cs = objIx;
-			int ce = objIx+1;
+			int ce = objIx + 1;
 			while (cs > 0 && dist.between(objs[objIx], objs[cs - 1]) <= eps)
 			{
 				cs--;

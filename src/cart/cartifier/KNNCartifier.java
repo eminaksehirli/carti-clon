@@ -2,7 +2,7 @@ package cart.cartifier;
 
 import java.util.Arrays;
 
-public class KNNCartifier extends Cartifier
+public class KNNCartifier extends ContinuousCartifier
 {
 	private int k;
 
@@ -13,7 +13,7 @@ public class KNNCartifier extends Cartifier
 	}
 
 	@Override
-	protected int[][] find1DCarts(Obj[] objs)
+	protected int[][] findContinuousCarts(Obj[] objs)
 	{
 		int[][] carts = new int[objs.length][2];
 		int cs = 0; // cartStart
