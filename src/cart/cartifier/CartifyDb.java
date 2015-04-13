@@ -25,7 +25,7 @@ public abstract class CartifyDb
 	protected final InputFile inputFile;
 	protected List<Dissimilarity> measures;
 
-	public CartifyDb(InputFile inputFile, List<Dissimilarity> measures)
+	public CartifyDb(InputFile inputFile, List<? extends Dissimilarity> measures)
 	{
 		this.inputFile = inputFile;
 		this.measures = new ArrayList<>(measures);
