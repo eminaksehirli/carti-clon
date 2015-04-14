@@ -96,4 +96,28 @@
 			</build>
 		</profile>
 	</profiles>
+	<url>http://adrem.uantwerpen.be/clon</url>
+		<organization>
+		<name>University of Antwerp - ADReM Research Group</name>
+		<url>http://adrem.uantwerpen.be</url>
+	</organization>
+	<developers>
+		<developer>
+			<name>Emin Aksehirli</name>
+			<email>emin.aksehirli@uantwerpen.be</email>
+			<organizationUrl>https://www.uantwerpen.be/nl/personeel/emin-aksehirli/</organizationUrl>
+		</developer>
+	</developers>
+		<licenses>
+		<license>
+			<name>GNU AFFERO GENERAL PUBLIC LICENSE, Version 3</name>
+			<url>https://www.gnu.org/licenses/agpl.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+		<scm>
+		<url>https://nop.uantwerpen.be/cartification/carti-bander-imp.git</url>
+		<developerConnection>scm:git:git@nop.uantwerpen.be/cartification/carti-bander-imp.git</developerConnection>
+		<connection>scm:git:git@nop.uantwerpen.be/cartification/carti-bander-imp.git</connection>
+	</scm>
 </project>
