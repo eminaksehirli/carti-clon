@@ -84,7 +84,6 @@ public abstract class MaximalMinerCombiner
 		return freqCollection.freqs;
 	}
 
-	public void mineFor(int k, int minLen, FreqCollector a)
 	/**
 	 * Mine the {@code inputFile} for subspace clusters using the {@CLON}
 	 * algorithm.
@@ -98,8 +97,9 @@ public abstract class MaximalMinerCombiner
 	 *          be used for real-time mining.
 	 * @return List of subspace clusters.
 	 */
+	public void mineFor(int k, int minLen, FreqCollector freqCol)
 	{
-		freqCollector = a;
+		freqCollector = freqCol;
 		this.minLen = minLen;
 
 		convertToItems(k);

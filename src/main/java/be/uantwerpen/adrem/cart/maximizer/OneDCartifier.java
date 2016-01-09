@@ -41,7 +41,7 @@ public class OneDCartifier
 		int exEnd = 0;
 		if (extendDim)
 		{
-			sortedDim = OneDCartifier.expandTheDim(k, sortedDim);
+			sortedDim = expandTheDim(k, sortedDim);
 			exStart = k / 2;
 			exEnd = k - exStart;
 		}
@@ -50,22 +50,18 @@ public class OneDCartifier
 
 		cartStarts[0] = cartStart;
 
-		// since we add #exStart objects at the beginning we offset the indices by
-		// exStart
 		for (int objIx = 0; objIx < sortedDim.length; objIx++)
 		{
 			final double obj = sortedDim[objIx];
 			int cartEnd = cartStart + k; // cartEnd is exclusive
 
 			while (cartEnd < sortedDim.length
-					&& OneDCartifier.dist(obj, sortedDim[cartEnd]) < OneDCartifier.dist(
-							obj, sortedDim[cartStart]))
+					&& dist(obj, sortedDim[cartEnd]) < dist(obj, sortedDim[cartStart]))
 			{
 				cartStart++;
 				cartEnd++;
 			}
 
-			// cartStarts[objIx - exStart] = cartStart;
 			cartStarts[objIx] = cartStart;
 		}
 		return Arrays.copyOfRange(cartStarts, exStart, cartStarts.length - exEnd);
