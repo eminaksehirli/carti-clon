@@ -2,6 +2,12 @@ package be.uantwerpen.adrem.cart.maximizer;
 
 import java.util.List;
 
+/**
+ * A pair of an object set and a dimension set.
+ * 
+ * @author M. Emin Aksehirli
+ * 
+ */
 public class Freq
 {
 	public int[] freqSet;

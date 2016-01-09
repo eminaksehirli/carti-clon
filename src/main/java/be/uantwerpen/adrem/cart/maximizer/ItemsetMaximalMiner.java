@@ -8,6 +8,13 @@ import java.util.Map.Entry;
 
 import be.uantwerpen.adrem.cart.io.InputFile;
 
+/**
+ * Uses maximal frequent itemset mining to find the clusters in individual
+ * dimensions.
+ * 
+ * @author M. Emin Aksehirli
+ * 
+ */
 public class ItemsetMaximalMiner extends MaximalMinerCombiner
 {
 	private static int area(Item[] dimItems, int start, int end)

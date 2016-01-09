@@ -3,6 +3,12 @@ package be.uantwerpen.adrem.cart.maximizer;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Finds maximal frequent itemsets in a one-dimensional projection.
+ * 
+ * @author M. Emin Aksehirli
+ * 
+ */
 public class CartiMaximizer implements CartiFiner
 {
 	private int minLen;

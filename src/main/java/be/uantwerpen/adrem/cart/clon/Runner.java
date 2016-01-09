@@ -8,6 +8,12 @@ import be.uantwerpen.adrem.cart.io.InputFile;
 import be.uantwerpen.adrem.cart.maximizer.Freq;
 import be.uantwerpen.adrem.cart.maximizer.ItemsetMaximalMiner;
 
+/**
+ * Driver class for the algorithm.
+ * 
+ * @author M. Emin Aksehirli
+ * 
+ */
 public class Runner
 {
 	public static void main(String[] args)
@@ -16,7 +22,7 @@ public class Runner
 		{
 			System.err.println("Usage: java Runner datafile.mime k minLen");
 			System.err.println("Output: (cluster size) [dimensions] -- [objects]");
-			System.err.println("For more information http://adrem.ua.ac.be/maxiband");
+			System.err.println("For more information http://adrem.uantwerpen.be/clon");
 
 			return;
 		}

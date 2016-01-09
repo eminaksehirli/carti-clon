@@ -6,8 +6,31 @@ import java.util.List;
 
 import be.uantwerpen.adrem.cart.model.Pair;
 
+/**
+ * This class implements a basic k-NN cartifier for one-dimensional projections.
+ * 
+ * @author M. Emin Aksehirli
+ * 
+ */
 public class OneDCartifier
 {
+	/**
+	 * Find the starts of the k-NN neighborhoods, a.k.a. carts, for the
+	 * one-dimensional projection {@code dim}. Since the neighborhood size is
+	 * fixed, returns only the starting objects.
+	 * 
+	 * Beware that this method first sorts the {@code dim} and the returns the
+	 * indices on this sorted list.
+	 * 
+	 * 
+	 * @param dim
+	 *          Values of one-dimensional projection
+	 * @param k
+	 *          Neighborhood size
+	 * @param extendDim
+	 * 
+	 * @return
+	 */
 	public static int[] findCartStarts(final double[] dim, int k,
 			boolean extendDim)
 	{
@@ -48,6 +71,25 @@ public class OneDCartifier
 		return Arrays.copyOfRange(cartStarts, exStart, cartStarts.length - exEnd);
 	}
 
+	/**
+	 * This method can be used to minimise the effect of artifacts caused by the
+	 * transformation. It adds auto-generated data objects before and after the
+	 * actual data-objects in the dataset.
+	 * 
+	 * The generated values have the same distance between each consequtive pair.
+	 * And the distance is equal to the average distance between the consequent
+	 * pairs in the original dataset.
+	 * 
+	 * Expanding the dimension can improve the accuracy if the dataset is noisy
+	 * enough.
+	 * 
+	 * @param k
+	 *          neighborhood size, the total number of added objects will be equal
+	 *          to {@code k}.
+	 * @param sortedDim
+	 *          The values that are going to be expanded.
+	 * @return A new array with the size of {@code sortedDim.length + k}.
+	 */
 	public static double[] expandTheDim(int k, double[] sortedDim)
 	{
 		double[] expandedDim = new double[sortedDim.length + k];
