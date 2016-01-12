@@ -3,7 +3,7 @@ CLON: Detecting Cluster Structures by Ordered Neighborhoods
 ===========================================================
 
 This project is an implementation of CLON algorithm. The details can be found in
- http://adrem.ua.ac.be/maxibander .
+ http://adrem.uantwerpen.be/clon .
 
 
 Application
@@ -68,9 +68,31 @@ Datasets
 --------
 Datasets that are used in the original paper can be found [here][datasets].
 
+Building the Application
+------------------------
+
+Get the latest source code from https://gitlab.com/adrem/carti-clon by using the
+command
+
+```
+git clone https://gitlab.com/adrem/carti-clon.git
+```
+
+This implementation uses [Apache Maven](https://maven.apache.org/) for 
+dependency management and building. To create an executable `.jar` file, execute
+the following command
+
+```
+mvn clean compile assembly:single
+```
+
+An executable jar file will be created in `target` directory. See above for 
+running instructions.
+
 Contact
 -------
-For more information you can visit http://adrem.ua.ac.be/maxibander or send
-an email to Emin Aksehirli <emin.aksehirli@uantwerpen.be>.
+For more information you can visit http://adrem.uantwerpen.be/clon or send
+an email to [Emin Aksehirli][] <emin.aksehirli@uantwerpen.be>.
 
-[data-sets]:http://adrem.ua.ac.be/sites/adrem.ua.ac.be/files/CLON_datasets.tar.bz2
+[data-sets]:http://adrem.uantwerpen.be/sites/adrem.ua.ac.be/files/CLON_datasets.tar.bz2
+[Emin Aksehirli]:http://memin.tk
